@@ -1,20 +1,59 @@
-import Link from "next/link";
-import routes from "@/Router/router";
+'use client';
+import Link from 'next/link';
+import routes from '@/Router/router';
+import { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
+import Home from './home';
 
-export default function Home() {
+interface NavbarProps {
+  children: ReactNode;
+}
+export default function App({ children }: NavbarProps) {
+  const pathName = usePathname();
+  const isHomePage = pathName === routes.home;
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <div className="container">
-        <div className="collapse navbar-collapse" id="ftco-nav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active"><Link href={routes.about} className="nav-link">Giới thiệu</Link></li>
-            <li className="nav-item"><Link href={routes.mission} className="nav-link">Sứ mệnh</Link></li>
-            <li className="nav-item"><Link href={routes.vision} className="nav-link">Tầm nhìn</Link></li>
-            <li className="nav-item"><Link href={routes.strategy} className="nav-link">chiến lược</Link></li>
-            <li className="nav-item"><Link href={routes.profession} className="nav-link">Nghành nghề</Link></li>
-          </ul>
-        </div>
+    <div>
+      <div className="navbar" id="ftco-nav">
+        <ul className='container'>
+          <li>
+            <Link className="nav-item" href={routes.home}>
+              {' '}
+              <img
+                width={100}
+                src="./images/logo.png"
+              />
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-item is-active" href={routes.home}>
+              TRANG CHỦ
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-item" href={routes.about}>
+              GIỚI THIỆU
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-item" href={routes.mission}>
+              SỨ MỆNH
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-item" href={routes.strategy}>
+              CHIẾN LƯỢC
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-item" href={routes.profession}>
+              NGÀNH NGHỀ
+            </Link>
+          </li>
+        </ul>
       </div>
-    </nav>
-  )
+      {isHomePage && <Home />}
+      {children}
+    </div>
+  );
 }

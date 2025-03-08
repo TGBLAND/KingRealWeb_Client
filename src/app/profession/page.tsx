@@ -1,9 +1,13 @@
-const professionPages = ()  => {
-    return (
-       <div>
+import App from "../page";
+
+const professionPages = () => {
+  return (
+    <div>
+      <App>
         <h1 className="title">Trang ngành nghề</h1>
-       </div>
-    )
-}
+      </App>
+    </div>
+  );
+};
 
 export default professionPages;
